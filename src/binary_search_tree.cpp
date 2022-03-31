@@ -84,7 +84,7 @@ namespace assignment {
 
   bool BinarySearchTree::remove(int key, Node*& node) {
     // Write your code here...
-    if (node == nullptr) {
+    if (!Contains(key)) {
       return false;
     }
     if (key < node->key) {
@@ -96,6 +96,7 @@ namespace assignment {
     } else if (key == node->key) {
 
       if (node->left == nullptr && node->right == nullptr) {
+        delete node;
         node = nullptr;
         return true;
 
