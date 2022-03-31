@@ -93,12 +93,11 @@ namespace assignment {
     } else if (key > node->key) {
       remove(key, node->right);
 
-    } else if (key == node->key) {
+    } else {
 
       if (node->left == nullptr && node->right == nullptr) {
         delete node;
         node = nullptr;
-        return true;
 
       } else if (node->left != nullptr && node->right != nullptr) {
         Node* n = find_min(node->right);
@@ -107,17 +106,12 @@ namespace assignment {
         remove(n->key, node->right);
 
       } else if (node->left != nullptr) {
-        Node* n = node->left;
-        delete node;
-        node = n;
-        return true;
+        node = node->left;
 
       } else if (node->right != nullptr) {
-        Node* n = node->right;
-        delete node;
-        node = n;
-        return true;
+        node = node->right;
       }
+      return true;
     }
   }
 
