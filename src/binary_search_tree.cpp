@@ -96,7 +96,6 @@ namespace assignment {
     } else if (key == node->key) {
 
       if (node->left == nullptr && node->right == nullptr) {
-        delete node;
         node = nullptr;
         return true;
 
