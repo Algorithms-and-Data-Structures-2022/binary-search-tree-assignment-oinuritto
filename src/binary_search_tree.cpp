@@ -107,15 +107,15 @@ namespace assignment {
         remove(n->key, node->right);
 
       } else if (node->left != nullptr) {
-        Node* deleting = node;
-        node = node->left;
-        delete deleting;
+        Node* n = node->left;
+        delete node;
+        node = n;
         return true;
 
       } else if (node->right != nullptr) {
-        Node* deleting = node;
-        node = node->right;
-        delete deleting;
+        Node* n = node->right;
+        delete node;
+        node = n;
         return true;
       }
     }
