@@ -89,23 +89,33 @@ namespace assignment {
     }
     if (key < node->key) {
       remove(key, node->left);
+
     } else if (key > node->key) {
       remove(key, node->right);
+
     } else if (key == node->key) {
+
       if (node->left == nullptr && node->right == nullptr) {
         delete node;
         node = nullptr;
         return true;
+
       } else if (node->left != nullptr && node->right != nullptr) {
         Node* n = find_min(node->right);
         node->key = n->key;
         node->value = n->value;
         remove(n->key, node->right);
+
       } else if (node->left != nullptr) {
+        Node* deleting = node;
         node = node->left;
+        delete deleting;
         return true;
+
       } else if (node->right != nullptr) {
+        Node* deleting = node;
         node = node->right;
+        delete deleting;
         return true;
       }
     }
