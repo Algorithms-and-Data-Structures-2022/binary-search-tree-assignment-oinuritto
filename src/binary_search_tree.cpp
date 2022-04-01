@@ -87,16 +87,13 @@ namespace assignment {
     if (!Contains(key)) {
       return false;
     }
+
     if (key < node->key) {
       remove(key, node->left);
-
     } else if (key > node->key) {
       remove(key, node->right);
-
     } else {
-
       if (node->left == nullptr && node->right == nullptr) {
-        delete node;
         node = nullptr;
 
       } else if (node->left != nullptr && node->right != nullptr) {
