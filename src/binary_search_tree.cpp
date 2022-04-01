@@ -84,32 +84,57 @@ namespace assignment {
 
   bool BinarySearchTree::remove(int key, Node*& node) {
     // Write your code here...
-    if (!Contains(key)) {
+//    if (!Contains(key)) {
+//      return false;
+//    }
+//
+//    if (key < node->key) {
+//      remove(key, node->left);
+//    } else if (key > node->key) {
+//      remove(key, node->right);
+//    } else {
+//      if (node->left == nullptr && node->right == nullptr) {
+//        delete node;
+//        node = nullptr;
+//
+//      } else if (node->left != nullptr && node->right != nullptr) {
+//        Node* n = find_min(node->right);
+//        node->key = n->key;
+//        node->value = n->value;
+//        remove(n->key, node->right);
+//
+//      } else if (node->left != nullptr) {
+//        node = node->left;
+//
+//      } else if (node->right != nullptr) {
+//        node = node->right;
+//      }
+//      return true;
+//    }
+    if (node == nullptr) {
       return false;
     }
-
     if (key < node->key) {
       remove(key, node->left);
     } else if (key > node->key) {
       remove(key, node->right);
     } else {
       if (node->left == nullptr && node->right == nullptr) {
+        delete node;
         node = nullptr;
-
-      } else if (node->left != nullptr && node->right != nullptr) {
-        Node* n = find_min(node->right);
-        node->key = n->key;
-        node->value = n->value;
-        remove(n->key, node->right);
-
-      } else if (node->left != nullptr) {
-        node = node->left;
-
-      } else if (node->right != nullptr) {
-        node = node->right;
+      } else if (node->left && node->right) {
+        Node* newNode = find_min(node->right);
+        node->key = newNode->key;
+        node->value = newNode->value;
+        remove(newNode->key, node->right);
+      } else {
+        Node* child = (node->left) ? node->left : node->right;
+        Node* current = node;
+        node = child;
+        delete current;
       }
-      return true;
     }
+    return true;
   }
 
   void BinarySearchTree::clear(Node* node) {
